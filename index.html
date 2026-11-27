@@ -1,60 +1,57 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#f7f8fa">
-  <meta name="description" content="A live photo and video gallery">
-  <title>Open Gallery</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Photos & Videos — Live Feed</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <header class="topbar">
-    <a class="brand" href="./" aria-label="Open Gallery home">
-      <span class="brand-mark" aria-hidden="true">G</span>
-      <span>Open Gallery</span>
+    <a class="brand" href="#">
+      <span class="brand-mark">O</span>
+      Our Photos
     </a>
-    <span class="live-label"><i aria-hidden="true"></i> Live gallery</span>
+    <div class="live-label"><i></i> Live Gallery</div>
   </header>
 
   <main>
-    <section class="intro" aria-labelledby="page-title">
+    <section class="intro">
       <div>
-        <p class="eyebrow">A shared space</p>
-        <h1 id="page-title">Moments, together.</h1>
-        <p class="lede">Share a photo or video. New uploads appear here for everyone.</p>
+        <p class="eyebrow">Free Cloud Gallery</p>
+        <h1>Share Photos & Videos</h1>
+        <p class="lede">Upload any photo or video. It goes live instantly for everyone to see.</p>
       </div>
-      <label class="upload-button" for="mediaInput">
-        <span aria-hidden="true">＋</span> Upload media
-      </label>
-      <input id="mediaInput" type="file" accept="image/*,video/*" multiple hidden>
+      <input type="file" id="mediaInput" accept="image/*,video/*" multiple hidden>
+      <label for="mediaInput" class="upload-button"><span>+</span> Upload Media</label>
     </section>
 
-    <section id="uploadPanel" class="upload-panel" aria-live="polite" hidden>
+    <div id="uploadPanel" class="upload-panel" hidden>
       <div class="upload-head">
-        <strong id="uploadName">Preparing upload…</strong>
+        <strong id="uploadName">Uploading...</strong>
         <span id="uploadPercent">0%</span>
       </div>
-      <div class="progress-track" role="progressbar" aria-label="Upload progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+      <div class="progress-track" role="progressbar" aria-valuenow="0" aria-valuemin="0" aria-valuemax="100">
         <span id="progressFill"></span>
       </div>
-      <p id="uploadStatus" class="upload-status">Waiting to start</p>
-    </section>
+      <p id="uploadStatus" class="upload-status"></p>
+    </div>
 
     <div class="gallery-heading">
       <div>
-        <p class="eyebrow">Community feed</p>
-        <h2>Latest uploads</h2>
+        <p class="eyebrow">Community Feed</p>
+        <h2>Latest Uploads</h2>
       </div>
       <span id="itemCount" class="item-count">0 items</span>
     </div>
 
-    <div id="connectionStatus" class="connection-status" role="status">Connecting to the live gallery…</div>
-    <section id="gallery" class="gallery" aria-label="Latest photos and videos"></section>
+    <p id="connectionStatus" class="connection-status"></p>
+    <div id="gallery" class="gallery"></div>
   </main>
 
-  <footer>Uploads are stored in Cloudinary. The shared gallery is powered by Firebase.</footer>
-  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+  <footer>Powered by ImageKit & Firebase</footer>
+  <div id="toast" class="toast" role="status"></div>
+
   <script type="module" src="app.js"></script>
 </body>
 </html>
