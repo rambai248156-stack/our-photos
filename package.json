@@ -1,9 +1,0 @@
-{
-  "name": "frames",
-  "version": "1.0.0",
-  "private": true,
-  "type": "module",
-  "description": "Real-time photo & video sharing. No dependencies.",
-  "scripts": { "start": "node server.js" },
-  "engines": { "node": ">=22.13" }
-}
