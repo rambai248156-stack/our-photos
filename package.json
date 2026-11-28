@@ -1,0 +1,9 @@
+{
+  "name": "our-photos",
+  "version": "2.0.0",
+  "private": true,
+  "type": "module",
+  "description": "Real-time photo & video sharing on Firebase + Cloudinary",
+  "scripts": { "start": "node server.js" },
+  "engines": { "node": ">=18" }
+}

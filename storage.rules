@@ -1,0 +1,14 @@
+rules_version = '2';
+service firebase.storage {
+  match /b/{bucket}/o {
+    // Used only for big files (over Cloudinary's free limits). Anyone can view; you can only write inside your own folder.
+    match /media/{uid}/{file} {
+      allow read: if true;
+      allow create: if request.auth != null && request.auth.uid == uid
+        && (request.resource.contentType.matches('image/.*') || request.resource.contentType.matches('video/.*'))
+        && request.resource.size < 5 * 1024 * 1024 * 1024;
+      allow update: if false;
+      allow delete: if request.auth != null && request.auth.uid == uid;
+    }
+  }
+}

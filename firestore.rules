@@ -1,0 +1,36 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    function signedIn() { return request.auth != null; }
+
+    // Posts: everyone can read; only a signed-in user can create their own; only the owner can delete.
+    match /posts/{postId} {
+      allow read: if true;
+      allow create: if signedIn()
+        && request.resource.data.uid == request.auth.uid
+        && request.resource.data.kind in ['photo', 'video']
+        && request.resource.data.title is string && request.resource.data.title.size() <= 100
+        && request.resource.data.desc is string && request.resource.data.desc.size() <= 500
+        && request.resource.data.media is string && request.resource.data.media.size() < 2000
+        && request.resource.data.createdAt == request.time;
+      allow update: if false;
+      allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+
+      match /comments/{commentId} {
+        allow read: if true;
+        allow create: if signedIn()
+          && request.resource.data.uid == request.auth.uid
+          && request.resource.data.text is string
+          && request.resource.data.text.size() > 0 && request.resource.data.text.size() <= 400
+          && request.resource.data.createdAt == request.time;
+        allow update: if false;
+        allow delete: if signedIn() && resource.data.uid == request.auth.uid;
+      }
+    }
+
+    // Likes are private: only you can see or change yours, so nobody sees counts.
+    match /users/{uid}/likes/{postId} {
+      allow read, write: if signedIn() && request.auth.uid == uid;
+    }
+  }
+}
